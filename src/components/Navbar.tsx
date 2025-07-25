@@ -1,12 +1,16 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
+import {type Dispatch, type SetStateAction } from "react";
 import todoIcon from "../assets/todoBlack.svg";
 import todoIconWhite from "../assets/todoWhite.svg";
 import pomodoroIcon from "../assets/pomodoroBlack.svg";
 import pomodoroIconWhite from "../assets/pomodoroWhite.svg";
 import notasIcon from "../assets/notasBlack.svg";
-import notasIconWhite from "../assets/notasWhite.svg"
-
+import notasIconWhite from "../assets/notasWhite.svg";
 import { AnimatePresence, motion } from "framer-motion";
+
+type Props = {
+  activePage: string; 
+  setActivePage: Dispatch<SetStateAction<string>>;
+};
 
 const NavbarData = [
     { id: 1, nome: "To-do", icon: todoIcon, iconActive: todoIconWhite, url: "#" },
@@ -14,19 +18,20 @@ const NavbarData = [
     { id: 3, nome: "Notas", icon: notasIcon, iconActive: notasIconWhite, url: "#" }
 ];
 
-export function Navbar() {
-    const [activeId, setActiveId] = useState(NavbarData[0].id);
+export function Navbar({ activePage, setActivePage }: Props) {
 
     return (
         <div className="flex items-center justify-center">
             <div className="flex gap-4 mt-10 bg-lime-400 w-60 h-12 py-1.5 px-2 rounded-xl justify-between">
                 {NavbarData.map((item) => {
-                    const isActive = item.id === activeId;
+                    const isActive = item.nome === activePage; 
 
                     return (
                         <motion.button
                             key={item.id}
-                            onClick={() => setActiveId(item.id)}
+                            onClick={() => {
+                                setActivePage(item.nome); 
+                            }}
                             className={`flex items-center gap-2 px-2 py-1 rounded-lg transition-all ${isActive ? "bg-[#27272A] text-white" : ""
                                 }`}
                         >
