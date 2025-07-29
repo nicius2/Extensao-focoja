@@ -4,4 +4,14 @@
   --default-font-family: "Inter", sans-serif;
 
   --color-zinc-900: #18181B;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --line-height-base: 1.5;
+  --font-size-m3-title-medium: 16px;
+  --letter-spacing-m3-title-medium: 0.15em;
+
+
+  -- --m3-title-medium-font-size: var(--font-size-m3-title-medium);
+  --m3-title-medium-line-height: var(--line-height-m3-title-medium);
+  --m3-title-medium-letter-spacing: var(--letter-spacing-m3-title-medium);
 }

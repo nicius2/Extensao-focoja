@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Navbar } from "./components/Navbar";
-import Todo  from "./components/todoList"; // Certifique-se de que 'Todo' está exportado corretamente
-import Pomodoro from "./components/pomodoro";
-import  Notas  from "./components/notas";
+import Todo from "./hooks/todo";
+import Pomodoro from "./hooks/pomodoro";
+import Notas from "./hooks/notas";
 
 import bg from "./assets/bg.svg";
 
 export function App() {
-  const [activePage, setActivePage] = useState('To-do'); // Use o nome exato do item para o estado inicial
+  const [activePage, setActivePage] = useState('To-do'); // Nome do compononente inicial
 
   const renderContent = () => {
     switch (activePage) {
@@ -23,9 +23,11 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center overflow-hidden bg-transparent">
+    <div className="min-h-screen flex justify-center overflow-hidden">
       <div
-        className="w-[400px] min-h-[500px] bg-zinc-900 rounded-xl my-10"
+        className="w-[400px] min-h-[500px] bg-zinc-900"
+
+        // background
         style={{
           backgroundImage: `url(${bg})`,
           backgroundSize: 'cover',
@@ -33,7 +35,9 @@ export function App() {
           backgroundRepeat: 'no-repeat',
         }}
       >
+        {/* Passando os estados para ser manipulado em Navbar */}
         <Navbar activePage={activePage} setActivePage={setActivePage} />
+
         {renderContent()}
       </div>
     </div>
