@@ -16,7 +16,9 @@
         "48": "logo.svg",
         "128": "logo.svg"
     },
-    "permissions": [],
+    "permissions": [
+        "storage"
+    ],
     "host_permissions": [],
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self'"
