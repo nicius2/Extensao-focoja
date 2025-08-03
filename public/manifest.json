@@ -1,26 +1,20 @@
 {
-    "manifest_version": 3,
-    "name": "FocoJá",
-    "version": "1.0",
-    "description": "Extensão com To-do, Pomodoro e Notas para foco e produtividade.",
-    "action": {
-        "default_popup": "index.html",
-        "default_icon": {
-            "16": "logo.svg",
-            "48": "logo.svg",
-            "128": "logo.svg"
-        }
-    },
-    "icons": {
-        "16": "logo.svg",
-        "48": "logo.svg",
-        "128": "logo.svg"
-    },
-    "permissions": [
-        "storage"
-    ],
-    "host_permissions": [],
-    "content_security_policy": {
-        "extension_pages": "script-src 'self'; object-src 'self'"
+  "manifest_version": 2,
+  "name": "FocoJá",
+  "version": "1.0",
+  "description": "Extensão com To-do, Pomodoro e Notas para foco e produtividade.",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "logo.svg",
+      "48": "logo.svg",
+      "128": "logo.svg"
     }
+  },
+  "icons": {
+    "16": "logo.svg",
+    "48": "logo.svg",
+    "128": "logo.svg"
+  },
+  "permissions": ["storage"]
 }

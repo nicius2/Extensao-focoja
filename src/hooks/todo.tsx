@@ -92,18 +92,18 @@ export default function Todo() {
                         <div
                             key={task.id}
                             className="flex items-center justify-between mx-5
-                            bg-zinc-900 border-[#27272A] border-[1px] p-2 px-4 rounded-xl mb-2"
+                            bg-zinc-900 border-[#27272A] border-[1px] p-2 px-4 rounded-xl mb-2 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.3),_0_4px_6px_-4px_rgba(0,0,0,0.3)]"
                         >
                             <div className="flex gap-2 items-center">
                                 <span className="cursor-pointer" onClick={() => handleToggleComplete(task.id)}>
                                     {task.isCompleted ? (
-                                        <img src={checkSvg} alt="círculo marcado" className="w-7 h-7" />
+                                        <img src={checkSvg} alt="círculo marcado" className="" />
                                     ) : (
                                         <img src={circleDefault} alt="círculo padrão" />
                                     )}
                                 </span>
 
-                                <p className={`text-[#A1A1AA] ${task.isCompleted ? 'line-through text-gray-500' : ''}`}>
+                                <p className={`text-[#A1A1AA] ${task.isCompleted ? 'line-through text-gray-500' : ''} text-sm font-medium`}>
                                     {task.text}
                                 </p>
                             </div>
