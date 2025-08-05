@@ -1,3 +1,4 @@
+import Browser from "webextension-polyfill";
 import { useEffect, useState } from "react";
 import { InputComponets } from "../components/inputTo-do";
 import circleDefault from "../assets/circle-dashed.svg";
@@ -17,21 +18,21 @@ export default function Todo() {
 
     // Carrega tarefas ao montar o componente
     useEffect(() => {
-        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-            chrome.storage.local.get('tasks', (result) => {
+        if (typeof Browser !== 'undefined' && Browser.storage && Browser.storage.local) {
+            Browser.storage.local.get('tasks').then((result: { tasks?: Task[] }) => {
                 if (result.tasks) {
                     setTasks(result.tasks);
                 }
-            });
+            })
         }
     }, []) // efeito executado apenas uma vez quando o componente é montado
 
     // Função para salvar tarefas no ARMAZENAMENTO LOCAL
     const saveTasksToLocalStorage = (updateTasks: Task[]) => {
-        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
-            chrome.storage.local.set({ tasks: updateTasks }, () => {
-                console.log('Tarefas salvas no armazenamento local.');
-            });
+        if (typeof Browser !== 'undefined' && Browser.storage && Browser.storage.local) {
+            Browser.storage.local.set({ tasks: updateTasks}).then(() => {
+                console.log('Amazenando tarefas localmente')
+            })
         }
     }
 

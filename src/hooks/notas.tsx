@@ -1,7 +1,7 @@
-export default function notas() {
+import { Textarea } from "../components/Textarea";
+
+export default function Notas() {
     return (
-        <div>
-            <h1 className="text-white text-2xl font-bold">Notas</h1>
-        </div>
-    );
+        <Textarea/>
+    )
 }
