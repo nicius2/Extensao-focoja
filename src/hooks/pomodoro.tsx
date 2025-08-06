@@ -114,7 +114,7 @@ export default function Pomodoro() {
     const progress = initialTime > 0 ? (time / initialTime) * circumference : 0;
 
     return (
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center my-12">
             <h1 className="text-white text-2xl font-bold mb-4">Pomodoro Timer</h1>
             <div className="relative w-48 h-48 flex items-center justify-center">
                 <svg className="w-full h-full" viewBox="0 0 200 200">

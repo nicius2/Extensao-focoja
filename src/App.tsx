@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Navbar } from "./components/Navbar";
 import Todo from "./hooks/todo";
 import Pomodoro from "./hooks/pomodoro";
@@ -7,23 +7,32 @@ import Notas from "./hooks/notas";
 import bg from "./assets/bg.svg";
 
 export function App() {
-  const [activePage, setActivePage] = useState('To-do'); // Nome do compononente inicial
+  const [activePage, setActivePage] = useState('To-do');
+  const [markdown, setMarkdown] = useState('');
+  const downloadFunctionRef = useRef<() => Promise<void>>(async () => {});
 
   const renderContent = () => {
     switch (activePage) {
-      case 'To-do' : // Use o mesmo nome ('To-do', 'Pomodoro', 'Notas')
+      case 'To-do':
         return <Todo />;
       case 'Pomodoro':
         return <Pomodoro />;
       case 'Notas':
-        return <Notas />;
+        return (
+          <Notas
+            onDownloadClick={(fn) => {
+              downloadFunctionRef.current = fn;
+            }}
+            markdownContent={markdown}
+            setMarkdownContent={setMarkdown}
+          />
+        );
       default:
         return <Todo />;
     }
   };
 
   useEffect(() => {
-    // Função para lidar com o pressionar de tecla
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
         case '1':
@@ -35,26 +44,17 @@ export function App() {
         case '3':
           setActivePage('Notas');
           break;
-        default:
-          break;
       }
     };
 
-    // Adiciona o ouvinte de evento 'keydown' ao objeto window
     window.addEventListener('keydown', handleKeyDown);
-
-    // Função de limpeza para remover o ouvinte quando o componente for desmontado
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
     <div className="min-h-screen flex justify-center overflow-hidden">
       <div
         className="w-[400px] min-h-[500px] bg-zinc-900"
-
-        // background
         style={{
           backgroundImage: `url(${bg})`,
           backgroundSize: 'cover',
@@ -62,8 +62,11 @@ export function App() {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        {/* Passando os estados para ser manipulado em Navbar */}
-        <Navbar activePage={activePage} setActivePage={setActivePage} />
+        <Navbar
+          activePage={activePage}
+          setActivePage={setActivePage}
+          onDownloadClick={() => downloadFunctionRef.current()}
+        />
 
         {renderContent()}
       </div>
