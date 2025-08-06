@@ -14,7 +14,7 @@ export default function Pomodoro() {
     useEffect(() => {
         const loadTimerState = async () => {
             const result = await browser.storage.local.get(['pomodoroTime', 'pomodoroInitialTime', 'pomodoroIsRunning', 'pomodoroEndTime']);
-            
+
             if (typeof result.pomodoroTime === 'number') {
                 setTime(result.pomodoroTime);
             }
@@ -24,7 +24,7 @@ export default function Pomodoro() {
             if (typeof result.pomodoroIsRunning === 'boolean') {
                 setIsRunning(result.pomodoroIsRunning);
             }
-            
+
             // Se estava rodando e há um tempo final, recalcular o tempo restante
             if (result.pomodoroIsRunning && typeof result.pomodoroEndTime === 'number') {
                 const remainingTime = Math.max(0, Math.floor((result.pomodoroEndTime - Date.now()) / 1000));
