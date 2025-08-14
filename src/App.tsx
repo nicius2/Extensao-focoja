@@ -9,7 +9,7 @@ import bg from "./assets/bg.svg";
 export function App() {
   const [activePage, setActivePage] = useState('To-do');
   const [markdown, setMarkdown] = useState('');
-  const downloadFunctionRef = useRef<() => Promise<void>>(async () => {});
+  const downloadFunctionRef = useRef<() => Promise<void>>(async () => { });
 
   const renderContent = () => {
     switch (activePage) {
@@ -34,22 +34,29 @@ export function App() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      switch (event.key) {
-        case '1':
-          setActivePage('To-do');
-          break;
-        case '2':
-          setActivePage('Pomodoro');
-          break;
-        case '3':
-          setActivePage('Notas');
-          break;
+      // Verifica se a tecla Alt está pressionada
+      if (event.altKey) {
+        switch (event.key) {
+          case '1':
+            setActivePage('To-do');
+            break;
+          case '2':
+            setActivePage('Pomodoro');
+            break;
+          case '3':
+            setActivePage('Notas');
+            break;
+        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
+
 
   return (
     <div className="min-h-screen flex justify-center overflow-hidden">
